@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "poc-seralization/proto";
+
+message UnaryRequest { 
+    int32 valueToIncrement = 1;
+}
+
+message CC { 
+    int32 counter = 1;
+}
+
+message UnaryResponse {
+    bool ok = 1;
+}
+
+
+service SerializedService {
+    rpc ParentUnaryCall(UnaryRequest) returns (UnaryResponse) {}
+    rpc UnaryCall(UnaryRequest) returns (UnaryResponse) {}
+
+    rpc ParentCC(CC) returns (UnaryResponse) {}
+    rpc ChildCC(CC) returns (UnaryResponse) {}
+}
